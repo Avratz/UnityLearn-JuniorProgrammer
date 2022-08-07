@@ -8,6 +8,7 @@ public class PlayerControllerX : MonoBehaviour
 
     public float floatForce;
     private float gravityModifier = 1.5f;
+    private float upperBoundary = 15.0f;
     private Rigidbody playerRb;
 
     public ParticleSystem explosionParticle;
@@ -16,6 +17,7 @@ public class PlayerControllerX : MonoBehaviour
     private AudioSource playerAudio;
     public AudioClip moneySound;
     public AudioClip explodeSound;
+    public AudioClip boingSound;
 
 
     // Start is called before the first frame update
@@ -23,6 +25,7 @@ public class PlayerControllerX : MonoBehaviour
     {
         Physics.gravity *= gravityModifier;
         playerAudio = GetComponent<AudioSource>();
+        playerRb = GetComponent<Rigidbody>();
 
         // Apply a small upward force at the start of the game
         playerRb.AddForce(Vector3.up * 5, ForceMode.Impulse);
@@ -33,9 +36,14 @@ public class PlayerControllerX : MonoBehaviour
     void Update()
     {
         // While space is pressed and player is low enough, float up
-        if (Input.GetKey(KeyCode.Space) && !gameOver)
+        if (Input.GetKey(KeyCode.Space) && !gameOver && transform.position.y < upperBoundary)
         {
             playerRb.AddForce(Vector3.up * floatForce);
+        }
+        // While position.y is greater than upperBoundary, set velocity to Vector3.Zero, to stop the globe immediately
+        if (transform.position.y > upperBoundary) 
+        {
+            playerRb.velocity = Vector3.zero;
         }
     }
 
@@ -57,7 +65,12 @@ public class PlayerControllerX : MonoBehaviour
             fireworksParticle.Play();
             playerAudio.PlayOneShot(moneySound, 1.0f);
             Destroy(other.gameObject);
-
+        }
+        // if player collides with ground, play sound and bounce off of the ground
+        else if (other.gameObject.CompareTag("Ground") && !gameOver)
+        {
+            playerRb.AddForce(Vector3.up * floatForce * 10);
+            playerAudio.PlayOneShot(boingSound, 1.0f);
         }
 
     }
