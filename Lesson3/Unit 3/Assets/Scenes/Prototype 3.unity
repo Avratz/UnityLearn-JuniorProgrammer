@@ -301,6 +301,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: 0
+  gameStarted: 0
+  isRunning: 0
+  score: 0
   explosionParticle: {fileID: 254196844}
   dirtParticle: {fileID: 1830630282}
   jumpSound: {fileID: 8300000, guid: 113ee460fadc340e4957a7404a9fbb27, type: 3}
@@ -759,7 +762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f147a01ef442b2345a3546109476c690, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f147a01ef442b2345a3546109476c690, type: 3}
       propertyPath: m_LocalPosition.y
@@ -828,7 +831,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a0ea0ca2737fa4387d4990558cb3bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePrefab: {fileID: 2503463368565377791, guid: f64471575f06f7f4c8d38a7e0e11dd7b, type: 3}
+  obstaclesPrefabs:
+  - {fileID: 2503463368565377791, guid: f64471575f06f7f4c8d38a7e0e11dd7b, type: 3}
+  - {fileID: 6566704402040868210, guid: 745c7a2c78faf8d468c9a9cb1bfd7c86, type: 3}
+  - {fileID: 8494132087607444552, guid: a64f12d097cf255478bd742dd63f288a, type: 3}
+  - {fileID: 5789224753901450471, guid: ed2419a6a0c72624789c90dceab1d588, type: 3}
 --- !u!4 &1022700018
 Transform:
   m_ObjectHideFlags: 0
